@@ -1,0 +1,2 @@
+bacteria,status,n_input_genes,n_input_samples,n_preprocessed_genes,n_preprocessed_samples,n_stable_edges,n_nodes,n_graph_edges,graph_density,average_degree,average_clustering,n_connected_components,largest_component_size,n_modules,largest_module_size,method,n_channels,subset_size,n_iterations,inflation,intersection_mode,min_presence
+gene_expression_Acinetobacter_baumannii,success,774,425,706,425,499,353,499,0.00803180530517641,2.8271954674220963,0.1447569584963353,15,298,314,3,python_genenet_like,3,425,28,2.0,soft,2

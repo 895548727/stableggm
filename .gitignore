@@ -1,0 +1,30 @@
+.idea/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+dist/
+build/
+*.egg-info/
+
+# Local analysis outputs
+stableggm_ab_output/
+tests/results/
+tests/vcholerae_test_output/
+examples/benchmark_output/
+examples/benchmark_output_1/
+examples/benchmark_output_2/
+examples/normalization_outputs/
+examples/select_edges_outputs/
+examples/stableggm_ab_output/
+examples/tests/test_outputs/
+.codex_cli_smoke_output/
+
+# Notebook and OS noise
+.ipynb_checkpoints/
+Thumbs.db
+.DS_Store

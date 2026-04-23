@@ -1,0 +1,2 @@
+n_nodes,n_edges,density,average_degree,average_clustering,n_connected_components,largest_component_size
+353,499,0.00803180530517641,2.8271954674220963,0.1447569584963353,15,298

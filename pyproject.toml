@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "stableggm"
+version = "0.1.0"
+description = "A stability-aware gene network inference toolkit based on partial correlation, subsampling, and module analysis."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [
+  { name = "StableGGM contributors" }
+]
+keywords = [
+  "gene network",
+  "partial correlation",
+  "graphical model",
+  "stability selection",
+  "transcriptomics",
+  "bioinformatics"
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Bio-Informatics"
+]
+dependencies = [
+  "numpy>=1.24",
+  "pandas>=2.0",
+  "scipy>=1.10",
+  "scikit-learn>=1.3",
+  "statsmodels>=0.14",
+  "networkx>=3.0",
+  "matplotlib>=3.7",
+  "matplotlib-venn>=0.11",
+  "markov-clustering>=0.0.6.dev0",
+  "pycombat"
+]
+
+[project.optional-dependencies]
+r = [
+  "rpy2>=3.5"
+]
+batch = [
+  "pycombat>=0.20"
+]
+dev = [
+  "pytest>=8.0",
+  "black>=24.0",
+  "isort>=5.13"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["stableggm"]
+
+[project.scripts]
+stableggm = "stableggm.cli:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

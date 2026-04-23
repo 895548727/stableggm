@@ -1,0 +1,2 @@
+term,term_size,overlap_size,gene_count,query_size,background_size,pvalue,overlap_genes,qvalue,score,rich_factor,gene_ratio,neg_log10_qvalue
+Two-component system (map02020),16,1,1,3,706,0.06655169012772533,ABBFA_000297,0.06655169012772533,1.176840910830563,0.0625,0.3333333333333333,1.176840910830563
