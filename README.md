@@ -1,97 +1,198 @@
 # StableGGM
 
-StableGGM is a Python toolkit for stability-aware gene network inference from transcriptomic data. It combines preprocessing, partial-correlation estimation, subsampling-based aggregation, edge selection, network construction, module detection, plotting, and optional enrichment analysis in one package.
+**StableGGM** is a Python package for stability-oriented gene network inference and analysis from transcriptomic data.  
+It provides an end-to-end workflow from expression matrix input to stable edge selection, network construction, module detection, enrichment analysis, and publication-ready visualizations.
 
-## Project status
+## Features
 
-This repository is still in an early stage. The package structure is now ready for GitHub publication, but the scientific workflow still needs broader debugging and validation before it should be treated as production-ready.
-
-## Current capabilities
-
-- RNA-seq and microarray preprocessing
-- Partial-correlation estimation from expression matrices
-- Stability selection through repeated subsampling
-- Edge selection with Python-based FDR control
-- Graph construction and network summaries
+- Preprocessing for RNA-seq and microarray expression matrices
+- Partial-correlation based network inference
+- Stability selection through repeated subsampling and multi-channel aggregation
+- Python-based edge selection with FDR control
+- Graph construction and network summary statistics
 - MCL-based module detection
-- Plotting helpers for diagnostics and network views
-- Optional enrichment analysis with user-supplied annotations
+- Diagnostic and network visualization utilities
+- Optional GO/KEGG enrichment analysis with user-supplied annotations
+- Command-line interface for running the full pipeline
 
+---
 ## Installation
 
-Basic install:
+### Basic installation
 
 ```bash
+pip install stableggm
+```
+
+### Install from source
+
+```bash
+git clone https://github.com/895548727/stableggm.git
+cd stableggm
 pip install -e .
 ```
 
-If you need ComBat batch correction support:
-
-```bash
-pip install -e ".[batch]"
-```
-
-Development install:
-
-```bash
-pip install -e ".[dev]"
-```
-
-## Package layout
-
-- `src/stableggm/`: publishable Python package
-- `tests/`: local tests and example-driven checks
-- `examples/`: demo scripts and generated artifacts
-- `data/`: local data helpers and mapping scripts
-
-## Minimal usage
+## Quick start (Python API)
 
 ```python
 import pandas as pd
 from stableggm.pipeline import run_stableggm_pipeline
 
-expr_df = pd.read_csv("tests/data/gene_expression_Acinetobacter_baumannii.csv", index_col=0)
+expr_df = pd.read_csv("gene_expression_Acinetobacter_baumannii.csv", index_col=0)
 
 result = run_stableggm_pipeline(
     expr_df=expr_df,
-    output_dir="output",
-    bacteria="demo",
+    output_dir="stableggm_output",
+    bacteria="Acinetobacter_baumannii",
     data_type="RNA-seq",
     normalization="CPM",
-    make_plots=False,
+    make_plots=True,
     annotation_df=None,
 )
 
 print(result["summary"])
 ```
 
-## CLI usage
+---
 
-After installation, you can run the packaged command directly:
+## Command-line usage
 
-```bash
-stableggm run --expr tests/data/gene_expression_Acinetobacter_baumannii.csv --output output --bacteria demo --smoke --smoke-n-genes 100 --smoke-n-samples 30 --no-make-plots
-```
-
-You can also run the module form:
+After installation, the package provides a command-line interface:
 
 ```bash
-python -m stableggm run --expr tests/data/gene_expression_Acinetobacter_baumannii.csv --output output --bacteria demo --smoke --smoke-n-genes 100 --smoke-n-samples 30 --no-make-plots
+stableggm --help
+stableggm run --help
 ```
 
-## Before uploading to GitHub
+### Minimal example
 
-- Review and trim any large generated result folders you do not want in the first commit.
-- Replace placeholder metadata if you want a real author name or repository URL.
-- Run a smoke test in your target Python environment.
-- Create a fresh GitHub repository, then push this folder after `git init`.
+```bash
+stableggm run \
+  --expr gene_expression_Acinetobacter_baumannii.csv \
+  --output stableggm_output \
+  --data-type RNA-seq \
+  --normalization CPM
+```
 
-## Known limitations
+### Example with smoke test
 
-- The repository still contains historical example outputs outside the package source tree.
-- Several old example scripts and tests appear to target earlier APIs and may need alignment.
-- Full pipeline validation has not been completed yet on this machine.
+```bash
+stableggm run \
+  --expr gene_expression_Acinetobacter_baumannii.csv \
+  --output stableggm_output \
+  --data-type RNA-seq \
+  --normalization CPM \
+  --smoke \
+  --smoke-n-genes 100 \
+  --smoke-n-samples 30 \
+  --no-make-plots
+```
+
+### Example with microarray data, batch correction, and annotation
+
+```bash
+stableggm run \
+  --expr gene_expression_Acinetobacter_baumannii.csv \
+  --output stableggm_output \
+  --data-type microarray \
+  --no-microarray-logged \
+  --batch ab_batch_expanded_clean.csv \
+  --annotation ab_output_go_kegg_mapped.tsv
+```
+
+---
+
+## Main outputs
+
+Running the pipeline can generate:
+
+- preprocessed expression matrix
+- stability table
+- stable edge table
+- graph summary table
+- node and edge tables
+- module membership table
+- module summary table
+- optional enrichment results
+- publication-ready figures
+
+Typical plots include:
+
+- batch-correction boxplots
+- batch-correction PCA plots
+- edge-overlap Venn plots
+- degree distribution plots
+- edge-weight distribution plots
+- largest connected component plots
+- module-colored network plots
+- module subgraph plots
+- hub-gene plots
+- enrichment bubble plots
+
+---
+
+## Input requirements
+
+### Expression matrix
+
+- rows: genes
+- columns: samples
+- file format: CSV or TSV
+
+### Batch file (optional)
+
+Must contain at least two columns:
+
+- `sample`
+- `batch`
+
+### Annotation file (optional)
+
+Used for enrichment analysis.  
+The supported annotation format should match the pipeline requirements in your installed version.  
+Typical fields include gene identifiers and GO/KEGG annotations.
+
+---
+
+## Package structure
+
+```text
+stableggm/
+├── src/stableggm/
+├── tests/
+├── examples/
+├── README.md
+├── LICENSE
+└── pyproject.toml
+```
+
+---
+
+## Example workflow
+
+StableGGM supports the following workflow:
+
+1. expression preprocessing  
+2. repeated subsampling and partial-correlation inference  
+3. online edge aggregation  
+4. stable edge selection across channels  
+5. graph construction  
+6. module detection  
+7. optional enrichment analysis  
+8. automated plotting and result export  
+
+---
+
+## Development installation
+
+For local development:
+
+```bash
+pip install -e ".[dev]"
+```
+
+---
 
 ## License
 
-MIT
+MIT License
