@@ -35,11 +35,11 @@ pip install -e .
 
 To run the quick start and minimal examples below, please download the required empirical Acinetobacter baumannii datasets from our repository:
 
-    📊 Expression Matrix: gene_expression_Acinetobacter_baumannii.csv — Raw/processed transcriptomic expression profiles.
+    📊 Expression Matrix: gene_expression_Acinetobacter_baumannii.csv(https://github.com/895548727/stableggm/blob/main/gene_expression_Acinetobacter_baumannii.csv) — Raw/processed transcriptomic expression profiles.
 
-    🏷️ Batch Information: ab_batch_expanded_clean.csv — Sample batch metadata for batch-correction utilities.
+    🏷️ Batch Information: ab_batch_expanded_clean.csv(https://github.com/895548727/stableggm/blob/main/ab_batch_expanded_clean.csv) — Sample batch metadata for batch-correction utilities.
 
-    🧬 Functional Annotation: ab_output_go_kegg_mapped.tsv — User-supplied GO/KEGG functional mappings for downstream enrichment analysis.
+    🧬 Functional Annotation: ab_output_go_kegg_mapped.tsv(https://github.com/895548727/stableggm/blob/main/ab_output_go_kegg_mapped.tsv) — User-supplied GO/KEGG functional mappings for downstream enrichment analysis.
 
 Please ensure these files are placed in your current working directory before executing the pipeline.
 
